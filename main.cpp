@@ -80,3 +80,61 @@ int main(){
 
     return 0;
 }
+
+// second part 
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main() {
+    // Get message from user
+    cout << "Enter your message: ";
+    string message;
+    getline(cin, message);
+    
+    // Clean the message (keep only letters)
+    string clean;
+    for(int i = 0; i < message.size(); i++) {
+        if((message[i] >= 'A' && message[i] <= 'Z') || 
+           (message[i] >= 'a' && message[i] <= 'z')) {
+            clean += toupper(message[i]);
+        }
+    }
+    
+    // Create a key from the messsage
+    int num = 0;
+    for(int i = 0; i < clean.size(); i++) {
+        num += clean[i];
+    }
+    
+    string key;
+    for(int i = 0; i < 5; i++) {
+        num = (num * 7 + 3) % 100;
+        key += 'A' + (num % 26);
+    }
+    
+    // Encrypt the message
+    string encrypted;
+    for(int i = 0; i < clean.size(); i++) {
+        char c = clean[i];
+        char k = key[i % key.size()];
+        char e = ((c - 'A' + k - 'A') % 26) + 'A';
+        encrypted += e;
+    }
+    
+    // Print encrypted message in 5-letter groups
+    cout << "\nEncrypted message:\n";
+    
+    for(int i = 0; i < encrypted.size(); i++) {
+        if(i > 0 & i % 5 == 0) cout << " ";
+        cout << encrypted[i];
+    }
+    
+    // Printt the key
+    cout << "\n\nKey: " << key << endl;
+    
+    return 0;
+}
