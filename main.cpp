@@ -151,11 +151,11 @@ using namespace std;
 int main() {
     int choice;
     cout << "Choose an option:" << endl;;
-    cout << "1. Decrypt (Type 1)" << endl;;
-    cout << "2. Encrypt (Part 2)" << endl;;
+    cout << "1. Decrypt (Enter 1)" << endl;;
+    cout << "2. Encrypt (Enter 2)" << endl;;
     cout << "Enter choice (1 or 2): ";
     cin >> choice;
-    // ChatGPT for this line directly under
+    // ChatGPT for this line directly under 
     cin.ignore(); 
 
     if (choice == 1) {
@@ -276,6 +276,9 @@ int main() {
 
             return 0;
         }
-
+    else {
+        cout << "Invalid choice. Please enter 1 or 2." << endl;
+    }
+    
     return 0;
 }
