@@ -155,7 +155,7 @@ int main() {
     cout << "2. Encrypt (Part 2)" << endl;;
     cout << "Enter choice (1 or 2): ";
     cin >> choice;
-    cin.ignore(); 
+    cin.ignore(); // ChatGPT for this line
 
     if (choice == 1) {
         //The words in the keys.txt are shift words
