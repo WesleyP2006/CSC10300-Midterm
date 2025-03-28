@@ -24,34 +24,56 @@ int main(){
     string newPhrase , ucPhrase;
     vector<int> shiftKeyValues;
     vector<int> frequency(26);
+    vector<char> alphaRef = {'A' , 'B' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' ,'K' ,'L' , 'M' , 'N' , 'O' , 'P' , 'Q' , 'R' , 
+                            'S' , 'T' , 'U' , 'V' , 'W' , 'X' , 'Y' , 'Z'};
     int count;
-
 
     for(char letter : phrase){
         if(isalpha(letter)){
             ucPhrase+=letter;
         }
     }
+
+    //Frequency analysis
+    for(int i = 0; i < ucPhrase.size(); i++){
+        for(int j = 0; j < alphaRef.size(); j++){
+            if(ucPhrase.at(i) == alphaRef.at(j)){
+                frequency.at(j) = frequency.at(j) + 1;
+            }
+        }
+    }
+
+    cout << "\n\nHere is the Frequency Analysis : " << endl;
+    for(int i = 0; i < alphaRef.size(); i++){
+        cout << alphaRef.at(i) << ": " << frequency.at(i) << "   "; 
+    }
    
+    //Decrypting
     for(int i = 0; i < keywords.size(); i++){
         shiftKeyValues.resize(keywords.at(i).size());
         count = 0;
         newPhrase = "";
 
+        //Getting Shift Key Value
         for(int j = 0; j < keywords.at(i).size(); j++){
-            shiftKeyValues.at(j) = toupper(keywords.at(i).at(j)) - 'A'; //Added plus 1 so it is within the range
+            shiftKeyValues.at(j) = toupper(keywords.at(i).at(j)) - 'A';//  0-25
         }
 
+        //Adding Decrypted letter to new phrase
         for(int j = 0; j < ucPhrase.size(); j++){
-            newPhrase.push_back((char)(((ucPhrase.at(j) - 'A' - shiftKeyValues.at(count) + 26) % 26) + 'A'));
+            newPhrase.push_back((char)(((ucPhrase.at(j) - 'A' - shiftKeyValues.at(count) + 26) % 26) + 'A')); // This is just formula to decipher
             count++;
             if(count >= shiftKeyValues.size()){
                 count = 0;
             }
         }
-        cout << keywords.at(i) << endl;
-
-        cout << newPhrase << "\niteration: " << i << "\n\n\n\n";
+        //Outputting found keyword
+        if(keywords.at(i) == "brick"){
+            cout << endl;
+            cout << "\nFound Keyword and Decrypted Phrase: " << endl;
+            cout << keywords.at(i) << endl;
+            cout << newPhrase << "\niteration: " << i << "\n\n\n\n";
+        }
 
     }
     cout << endl;
