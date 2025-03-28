@@ -112,7 +112,7 @@ int main() {
     
     string key;
     for(int i = 0; i < 5; i++) {
-        num = (num * 7 + 3) % 100;
+        num = (num * 6 + 3) % 100;
         key += 'A' + (num % 26);
     }
     
